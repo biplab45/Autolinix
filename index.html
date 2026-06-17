@@ -87,12 +87,23 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .logo-img{
-    width:40px;
-    height:40px;
-    object-fit:contain;
-    border-radius: 7px;
-}
+
+        .logo-img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: rgba(129, 140, 248, 0.4);
+        }
+
         .section-label {
             font-size: 11px;
             font-weight: 600;
@@ -224,8 +235,7 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
+            gap: 14px;
         }
 
         .logo-icon {
@@ -244,9 +254,12 @@
 
         .logo-text {
             font-family: var(--font-display);
+            font-size: 28px;
             font-weight: 800;
-            font-size: 20px;
-            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: none;
         }
 
         .nav-links {
@@ -258,7 +271,7 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 500;
             padding: 8px 14px;
             border-radius: 8px;
@@ -355,7 +368,7 @@
             z-index: 1;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 32pxx;
             align-items: center;
             padding: 80px 0;
         }
@@ -693,6 +706,10 @@
             backdrop-filter: blur(20px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             font-size: 12px;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         .fc1 {
@@ -1417,13 +1434,14 @@
 
         .calendly-card p {
             font-size: 14px;
-            opacity: 0.85;
+            opacity: 1;
+            color: #efeeee;
             margin-bottom: 20px;
         }
 
         .calendly-card .btn {
             background: #fff;
-            color: #1a1a2e;
+            color: #343457;
         }
 
         .calendly-card .btn:hover {
@@ -1663,7 +1681,7 @@
         @media (max-width: 900px) {
 
             .nav-links,
-            .nav-cta .btn-ghost {
+            .nav-cta {
                 display: none;
             }
 
@@ -1723,6 +1741,23 @@
         }
 
         @media (max-width: 600px) {
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .hero-h1 {
+                font-size: 48px;
+            }
+
+            .hero-sub {
+                font-size: 16px;
+            }
+
             .section {
                 padding: 80px 0;
             }
@@ -1797,6 +1832,31 @@
 
         nav.scrolled .nav-glow-line {
             opacity: 0.5;
+        }
+
+        @media (max-width: 600px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .stat-card {
+                width: 100%;
+                min-width: 0;
+            }
         }
     </style>
 </head>
@@ -2527,24 +2587,24 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" placeholder="John" required>
+                                <input id="firstName" type="text" placeholder="John" required>
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" placeholder="Smith" required>
+                                <input id="lastName" type="text" placeholder="Smith" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Work Email</label>
-                            <input type="email" placeholder="john@company.com" required>
+                            <input id="email" type="email" placeholder="john@company.com" required>
                         </div>
                         <div class="form-group">
                             <label>Company / Business</label>
-                            <input type="text" placeholder="Your company name">
+                            <input id="company" type="text" placeholder="Your company name">
                         </div>
                         <div class="form-group">
                             <label>What are you looking for?</label>
-                            <select>
+                            <select id="service">
                                 <option value="">Select a service...</option>
                                 <option>AI Agents</option>
                                 <option>Workflow Automation</option>
@@ -2557,7 +2617,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tell us about your business &amp; goals</label>
-                            <textarea
+                            <textarea id="message"
                                 placeholder="Briefly describe your current challenges and what you'd like to automate..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
@@ -2735,14 +2795,42 @@
         }
 
         // ── FORM
-        function handleSubmit(e) {
+        async function handleSubmit(e) {
             e.preventDefault();
-            const btn = e.target.querySelector('[type=submit]');
-            btn.textContent = '✓ Message Sent — We\'ll be in touch shortly!';
-            btn.style.background = 'linear-gradient(135deg,#10b981,#0d9488)';
-            btn.disabled = true;
-        }
 
+            const data = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch(
+                    'https://biplab1915i.app.n8n.cloud/webhook/autolinix-contact',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                if (response.ok) {
+                    alert('Message Sent Successfully!');
+                    e.target.reset();
+                } else {
+                    alert('Failed to send message.');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert('Error');
+            }
+        }
         // ── SMOOTH LINK SCROLL
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
