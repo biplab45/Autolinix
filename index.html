@@ -59,6 +59,133 @@
             overflow-x: hidden;
         }
 
+        /* CHAT WINDOW */
+        #chatWindow {
+            position: fixed;
+            bottom: 110px;
+            right: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            width: 380px;
+            height: 600px;
+
+            background: rgba(10, 15, 30, .85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+
+            border: 1px solid rgba(99, 102, 241, .25);
+            border-radius: 24px;
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 10000;
+
+            box-shadow:
+                0 20px 80px rgba(0, 0, 0, .5);
+        }
+
+        #chatWindow.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        #chatHeader {
+            padding: 14px 18px;
+            border-radius: 24px 24px 0 0;
+            background: linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            color: white;
+            font-weight: 700;
+        }
+
+        #chatMessages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .typing {
+            display: inline-flex;
+            gap: 4px;
+            padding: 12px;
+            background: rgba(255, 255, 255, .05);
+            border-radius: 12px;
+        }
+
+        .typing span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #8b5cf6;
+            animation: bounce 1.2s infinite;
+        }
+
+        .typing span:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .typing span:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .bot-msg {
+            background: rgba(255, 255, 255, .05);
+            max-width: 85%;
+            line-height: 1.7;
+            font-size: 15px;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        #emailSection {
+            padding: 10px 15px;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+
+            display: flex;
+            gap: 10px;
+        }
+
+        #emailSection input {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: white;
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #emailSection input::placeholder {
+            color: #94a3b8;
+        }
+
+        #emailSection button {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
         /* ── SCROLLBAR ── */
         ::-webkit-scrollbar {
             width: 6px;
@@ -624,6 +751,14 @@
             gap: 8px;
         }
 
+        #emailError {
+            color: #ef4444;
+            font-size: 13px;
+            margin-left: 22px;
+            margin-top: -5px;
+            margin-bottom: 5px;
+        }
+
         .activity-item {
             display: flex;
             align-items: center;
@@ -873,22 +1008,80 @@
             margin-top: 8px;
         }
 
-        /*Spinner*/
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            display: inline-block;
-            margin-right: 8px;
+        /* AI Agent */
+        #chatButton {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 14px 20px;
+
+            border-radius: 50px;
+
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .15);
+            backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, .08);
+
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+            z-index: 9999;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, .4),
+                0 0 30px rgba(99, 102, 241, .25);
+
+            transition: .3s;
         }
 
-        @keyframes spin {
+        #chatButton:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, .4);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, .5),
+                0 0 40px rgba(99, 102, 241, .4);
+        }
+
+        #chatButton span:first-child {
+            color: #818cf8;
+            font-size: 18px;
+
+            animation: pulseAI 2s infinite;
+        }
+
+        @keyframes pulseAI {
+
+            0%,
             100% {
-                transform: rotate(360deg);
+                opacity: 1;
             }
+
+            50% {
+                opacity: .5;
+            }
+
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .chat-status {
+            font-size: 12px;
+            color: #17d634;
+            font-size: 12px;
+            margin-top: 4px;
         }
 
         /* ── SERVICES ── */
@@ -2136,6 +2329,60 @@
             </div>
         </div>
     </section>
+    <!-- CHAT BUTTON -->
+    <div id="chatButton">
+        <span>✦</span>
+        <span>Ask AI</span>
+    </div>
+
+    <!-- CHAT WINDOW -->
+    <div id="chatWindow">
+
+        <div id="chatHeader">
+            <div>
+                <div class="chat-title">✦ AutoLinix AI</div>
+                <div class="chat-status">● Online Now</div>
+            </div>
+        </div>
+
+        <div id="chatMessages">
+            <div class="bot-msg">
+                👋 Welcome to AutoLinix
+
+                Please enter your email to continue.
+            </div>
+        </div>
+
+        <div id="emailSection">
+
+            <input type="email" id="userEmail" placeholder="Enter your email">
+
+            <button onclick="startChat()">
+                Continue
+            </button>
+
+        </div>
+
+        <div id="emailError"></div>
+
+    </div>
+
+    <div id="chatMessages">
+        <div class="bot-msg">
+            👋 Welcome to AutoLinix
+
+            Please enter your email to continue.
+        </div>
+    </div>
+
+    <div id="emailSection">
+        <input type="email" id="userEmail" placeholder="Enter your email">
+        <div id="emailError"></div>
+        <button onclick="startChat()">
+            Continue
+        </button>
+    </div>
+    </div>
 
     <!-- TRUST BANNER -->
     <div class="trust-banner">
@@ -2951,8 +3198,8 @@
                     btn.disabled = false;
                     btn.innerHTML = 'Send Message →';
                 }
-                 else {
-                   btn.disabled = false;
+                else {
+                    btn.disabled = false;
                     btn.innerHTML = 'Send Message →';
                     alert('Failed to send message.');
                 }
@@ -2980,6 +3227,76 @@
                 closePopup();
             }, 5000);
         }
+        function startChat() {
+
+            const email = document
+                .getElementById("userEmail")
+                .value
+                .trim();
+
+            const emailError =
+                document.getElementById("emailError");
+
+            // Empty email
+            if (email === "") {
+
+                emailError.textContent =
+                    "Please enter your email";
+
+                return;
+            }
+
+            // Invalid email
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+
+                emailError.textContent =
+                    "Please enter a valid email address";
+
+                return;
+            }
+
+            // Clear error
+            emailError.textContent = "";
+
+            // Typing animation
+            const typing =
+                document.createElement("div");
+
+            typing.className = "typing";
+
+            typing.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+    `;
+
+            document
+                .getElementById("chatMessages")
+                .appendChild(typing);
+
+            setTimeout(() => {
+
+                typing.remove();
+
+            }, 1500);
+
+        }
+        //- AI Widget
+        const chatButton =
+            document.getElementById("chatButton");
+
+        const chatWindow =
+            document.getElementById("chatWindow");
+
+        chatButton.addEventListener("click", () => {
+
+            chatWindow.classList.toggle("active");
+
+        });
+
         // ── SMOOTH LINK SCROLL
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
