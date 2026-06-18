@@ -20,6 +20,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             --bg-0: #03040a;
@@ -1135,6 +1136,22 @@
             transition: var(--transition);
         }
 
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle,
+                    rgba(99, 102, 241, .15),
+                    transparent 70%);
+            opacity: 0;
+            transition: .4s;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
         .service-card::before {
             content: '';
             position: absolute;
@@ -1204,6 +1221,30 @@
             gap: 10px;
         }
 
+        /* spinner */
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #submitBtn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
         /* ── INDUSTRIES ── */
         #industries {
             padding: 120px 0;
@@ -1249,6 +1290,185 @@
         .industry-card p {
             font-size: 13px;
             color: var(--text-secondary);
+        }
+
+        /* hero-text slide in */
+        .hero-left {
+            animation: heroLeft 1.8s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        @keyframes heroLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-180px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-left,
+        .hero-visual {
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        /* dasboard slide in */
+        .hero-visual {
+            animation: heroRight 2s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+
+        @keyframes heroRight {
+            from {
+                opacity: 0;
+                transform: translateX(220px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* floating dashboard */
+        .dashboard {
+            animation: dashboardFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes dashboardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* hero button pop in */
+        .hero-actions {
+            animation: heroButtons 1.4s ease forwards;
+        }
+
+        @keyframes heroButtons {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Avatar bounce */
+        .avatar-stack {
+            animation: avatarPop 1.8s ease forwards;
+        }
+
+        @keyframes avatarPop {
+            0% {
+                opacity: 0;
+                transform: scale(.7);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Dashboard glow pulse */
+        .dashboard {
+            box-shadow:
+                0 0 0 rgba(99, 102, 241, .2);
+            animation:
+                dashboardFloat 5s ease-in-out infinite,
+                dashboardGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes dashboardGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(99, 102, 241, .15);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(99, 102, 241, .35);
+            }
+        }
+
+        @media (max-width:600px) {
+
+            @keyframes heroLeft {
+                from {
+                    opacity: 0;
+                    transform: translateY(60px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes heroRight {
+                from {
+                    opacity: 0;
+                    transform: translateY(80px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        @media (max-width:600px) {
+
+            .hero-left {
+                animation: heroMobile 0.8s ease-out forwards;
+            }
+
+            @keyframes heroMobile {
+                from {
+                    opacity: 0;
+                    transform: translateY(25px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        @media (max-width:600px) {
+
+            .hero-visual {
+                animation: dashboardMobile 0.9s ease-out forwards;
+            }
+
+            @keyframes dashboardMobile {
+                from {
+                    opacity: 0;
+                    transform: scale(.95);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
         }
 
         /* ── CASE STUDIES ── */
@@ -1726,6 +1946,56 @@
             gap: 16px;
         }
 
+        /* Scroll icon */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 50%;
+
+            background: rgba(15, 20, 40, .85);
+            backdrop-filter: blur(20px);
+
+            color: #818cf8;
+            font-size: 16px;
+
+            cursor: pointer;
+            z-index: 9999;
+            bottom: 70px;
+            animation: floatArrow 3s ease-in-out infinite;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: all .3s ease;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, .4);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, .25);
+        }
+
+        @media (max-width:600px) {
+            #backToTop {
+                width: 34px;
+                height: 34px;
+                font-size: 14px;
+                left: 12px;
+                bottom: 90px;
+            }
+        }
+
         /* ── FOOTER ── */
         footer {
             border-top: 1px solid var(--border);
@@ -1754,26 +2024,37 @@
         }
 
         .social-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 9px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border);
+            width: 46px;
+            height: 46px;
+
+            border-radius: 14px;
+
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(255, 255, 255, .08);
+
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            font-size: 16px;
-            transition: var(--transition);
+
+            color: #a5b4fc;
+            font-size: 18px;
+
+            transition: all .3s ease;
         }
 
         .social-btn:hover {
-            border-color: var(--border-glow);
-            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-4px);
+            color: white;
+
+            border-color: rgba(99, 102, 241, .5);
+
+            background: rgba(99, 102, 241, .12);
+
+            box-shadow: 0 10px 25px rgba(99, 102, 241, .25);
         }
 
         .footer-col h4 {
-            font-size: 13px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 20px;
@@ -1783,7 +2064,7 @@
 
         .footer-col a {
             display: block;
-            font-size: 14px;
+            font-size: 18px;
             color: var(--text-secondary);
             text-decoration: none;
             margin-bottom: 12px;
@@ -1805,7 +2086,7 @@
         }
 
         .footer-bottom p {
-            font-size: 13px;
+            font-size: 18px;
             color: var(--text-muted);
         }
 
@@ -1907,11 +2188,33 @@
             }
         }
 
+        @keyframes floatArrow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
         .footer-legal a {
-            font-size: 13px;
+            font-size: 15px;
             color: var(--text-muted);
             text-decoration: none;
             transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .footer-brand .logo-text {
+            font-size: 32px;
+            font-weight: 800;
         }
 
         .footer-legal a:hover {
@@ -2084,7 +2387,46 @@
             }
 
             .footer-top {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+                margin: 12px auto;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-col {
+                text-align: center;
+            }
+
+            .footer-col h4 {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .footer-col a {
+                display: block;
+                font-size: 12px;
+                margin-bottom: 6px;
+                line-height: 1.3;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
             }
 
             .hero-actions {
@@ -2103,14 +2445,13 @@
             top: 72px;
             left: 0;
             right: 0;
-            bottom: 0;
             z-index: 999;
             background: rgba(3, 4, 10, 0.97);
             backdrop-filter: blur(20px);
-            padding: 32px 24px;
+            padding: 10px 20px;
             display: none;
             flex-direction: column;
-            gap: 8px;
+            gap: 0;
         }
 
         .mobile-nav.open {
@@ -2120,9 +2461,9 @@
         .mobile-nav a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
-            padding: 16px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--border);
         }
 
@@ -2169,6 +2510,19 @@
             .stat-card {
                 width: 100%;
                 min-width: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #chatWindow {
+                width: calc(100vw - 20px);
+                max-width: calc(100vw - 20px);
+
+                left: 10px;
+                right: 10px;
+
+                height: 75vh;
+                bottom: 90px;
             }
         }
     </style>
@@ -3004,7 +3358,7 @@
             <button onclick="closePopup()">Awesome!</button>
         </div>
     </div>
-
+    <button id="backToTop">↑</button>
     <!-- FOOTER -->
     <footer>
         <div class="container">
@@ -3017,36 +3371,52 @@
                     <p>We help ambitious businesses eliminate repetitive work and scale operations through intelligent
                         AI automation, agents, and custom workflow systems.</p>
                     <div class="footer-social">
-                        <a href="#" class="social-btn" title="LinkedIn">💼</a>
-                        <a href="#" class="social-btn" title="Twitter/X">𝕏</a>
-                        <a href="#" class="social-btn" title="YouTube">▶</a>
-                        <a href="https://wa.me/918535879358" class="social-btn" title="WhatsApp">💬</a>
-                        <a href="mailto:autolinix@gmail.com" class="social-btn" title="Email">✉️</a>
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+
+                        <a href="#" class="social-btn">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Services</h4>
-                    <a href="#services">AI Agents</a>
-                    <a href="#services">Workflow Automation</a>
-                    <a href="#services">CRM Automation</a>
-                    <a href="#services">Lead Qualification</a>
-                    <a href="#services">AI Voice Agents</a>
-                    <a href="#services">Custom Integrations</a>
+                    <a href="#services">AI</a>
+                    <a href="#services">Workflow</a>
+                    <a href="#services">CRM</a>
+                    <a href="#services">Lead Qual</a>
+                    <a href="#services">Voice AI</a>
+                    <a href="#services">Integrations</a>
                 </div>
+
                 <div class="footer-col">
                     <h4>Company</h4>
-                    <a href="#case-studies">Case Studies</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#process">How We Work</a>
+                    <a href="#case-studies">Cases</a>
+                    <a href="#testimonials">Reviews</a>
+                    <a href="#process">Process</a>
                     <a href="#faq">FAQ</a>
                     <a href="#contact">Contact</a>
                 </div>
+
                 <div class="footer-col">
                     <h4>Contact</h4>
-                    <a href="mailto:autolinix@gmail.com">autolinix@gmail.com</a>
-                    <a href="tel:+918535879358">+91 85358 79358</a>
-                    <a href="https://calendly.com/autolinix/30min" target="_blank">Book a Call</a>
-                    <a href="https://wa.me/918535879358" target="_blank">WhatsApp Us</a>
+                    <a href="mailto:autolinix@gmail.com">Email</a>
+                    <a href="tel:+918535879358">Call</a>
+                    <a href="https://wa.me/918535879358" target="_blank">WhatsApp</a>
+                    <a href="https://calendly.com/autolinix/30min" target="_blank">Book Meeting</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -3119,7 +3489,23 @@
                 chart.appendChild(wrap);
             });
         }
+        // scroll icon
+        const backToTop = document.getElementById("backToTop");
 
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+        });
+
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
         // ── ACTIVITY FEED (live-feel)
         const activities = [
             { dot: 'ad-green', text: 'Lead qualified: Sarah Johnson → High Priority', time: 'just now' },
@@ -3158,7 +3544,7 @@
             const btn = document.getElementById('submitBtn');
 
             btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Sending...';
+            btn.innerHTML = 'Sending.... <span class="spinner"></span>';
 
             const data = {
                 firstName: document.getElementById('firstName').value,
