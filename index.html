@@ -157,6 +157,18 @@
             }
         }
 
+        @keyframes messagePop {
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         .bot-msg {
             background: rgba(255, 255, 255, .05);
             max-width: 85%;
@@ -168,32 +180,78 @@
         }
 
         #emailSection {
-            padding: 10px 15px;
-            border-top: 1px solid rgba(255, 255, 255, .08);
-
             display: flex;
             gap: 10px;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+
+            transition: all .35s ease;
         }
 
         #emailSection input {
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .08);
-            color: white;
             flex: 1;
-            padding: 12px;
-            border: none;
+
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .08);
+
+            color: white;
+
+            padding: 12px 14px;
             border-radius: 10px;
+
+            outline: none;
+            transition: .3s;
         }
 
         #emailSection input::placeholder {
             color: #94a3b8;
         }
 
+        #emailSection input:focus {
+            border-color: #8b5cf6;
+        }
+
         #emailSection button {
-            padding: 12px 16px;
+            background: linear-gradient(135deg,
+                    #6366f1,
+                    #a855f7);
+
             border: none;
+            color: white;
+
+            padding: 12px 18px;
             border-radius: 10px;
+            flex-shrink: 0;
+            width: 120px;
             cursor: pointer;
+            font-weight: 600;
+
+            transition: .3s;
+        }
+
+        #emailSection button:hover {
+            transform: translateY(-2px);
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .fade-in {
+            animation: fadeInChat .4s ease forwards;
+        }
+
+        @keyframes fadeInChat {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ── SCROLLBAR ── */
@@ -608,6 +666,46 @@
 
         .trust-text strong {
             color: var(--text-primary);
+        }
+
+        /* Chat input section */
+
+        #chatInputSection {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        #chatInput {
+            flex: 1;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        #chatInput::placeholder {
+            color: #94a3b8;
+        }
+
+        #chatInput:focus {
+            border-color: #8b5cf6;
+        }
+
+        #chatInputSection button {
+            background: linear-gradient(135deg,
+                    #6366f1,
+                    #a855f7);
+
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         /* ── AI DASHBOARD VISUAL ── */
@@ -2715,6 +2813,13 @@
                 Please enter your email to continue.
             </div>
         </div>
+        <div id="chatInputSection" style="display:none;">
+            <input id="chatInput" type="text" placeholder="Ask anything...">
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+        </div>
 
         <div id="emailSection">
 
@@ -3605,7 +3710,93 @@
                 closePopup();
             }, 5000);
         }
-        function startChat() {
+
+        async function sendMessage() {
+
+            const input =
+                document.getElementById("chatInput");
+
+            const message =
+                input.value.trim();
+
+            if (!message) return;
+
+            const chat =
+                document.getElementById("chatMessages");
+            const msg = document.createElement("div");
+
+            msg.style.margin = "8px 0 8px auto";
+            msg.style.maxWidth = "75%";
+            msg.style.padding = "10px 14px";
+            msg.style.borderRadius = "14px";
+            msg.style.background = "linear-gradient(135deg,#6366f1,#a855f7)";
+            msg.style.color = "white";
+            msg.style.width = "fit-content";
+            msg.style.fontSize = "14px";
+            msg.style.lineHeight = "1.4";
+            msg.style.wordWrap = "break-word";
+            msg.style.animation = "messagePop .25s ease";
+
+            msg.textContent = message;
+
+            chat.appendChild(msg);
+            const typing = document.createElement("div");
+
+            typing.className = "typing";
+
+            typing.innerHTML = `
+    <span></span>
+    <span></span>
+    <span></span>
+`;
+
+            chat.appendChild(typing);
+            try {
+
+                const response = await fetch(
+                    "https://biplab1915i.app.n8n.cloud/webhook/237d690e-af4d-44ca-a557-3a5e4e5aa62e",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                typing.remove();
+
+                const botMsg = document.createElement("div");
+                botMsg.className = "bot-msg";
+
+                botMsg.textContent = data.output;
+
+                chat.appendChild(botMsg);
+
+            } catch (error) {
+
+                console.error(error);
+
+                typing.remove();
+
+                const botMsg = document.createElement("div");
+                botMsg.className = "bot-msg";
+
+                botMsg.textContent = "Error getting response.";
+
+                chat.appendChild(botMsg);
+            }
+
+            input.value = "";
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+
+        async function startChat() {
 
             const email = document
                 .getElementById("userEmail")
@@ -3638,6 +3829,12 @@
 
             // Clear error
             emailError.textContent = "";
+            const continueBtn = document.querySelector("#emailSection button");
+
+            continueBtn.disabled = true;
+            continueBtn.textContent = "Connecting...";
+            continueBtn.style.opacity = "0.7";
+            continueBtn.style.cursor = "not-allowed";
 
             // Typing animation
             const typing =
@@ -3646,11 +3843,47 @@
             typing.className = "typing";
 
             typing.innerHTML = `
+<div style="display:flex;align-items:center;gap:10px;">
+    <span></span>
+    <span></span>
+    <span></span>
+    <div style="font-size:13px;color:#94a3b8;">
+        Connecting to AutoLinix AI...
+    </div>
+</div>
+`;
+
+            document
+                .getElementById("chatMessages")
+                .appendChild(typing);
+
+            try {
+
+                await fetch("https://biplab1915i.app.n8n.cloud/webhook/237d690e-af4d-44ca-a557-3a5e4e5aa62e", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: email
+                    })
+                });
+
+
+            } catch (error) {
+
+                // Typing animation
+                const typing =
+                    document.createElement("div");
+
+                typing.className = "typing";
+
+                typing.innerHTML = `
         <span></span>
         <span></span>
         <span></span>
     `;
-
+            }
             document
                 .getElementById("chatMessages")
                 .appendChild(typing);
@@ -3659,7 +3892,34 @@
 
                 typing.remove();
 
+                const emailSection =
+                    document.getElementById("emailSection");
+
+                emailSection.classList.add("fade-out");
+
+                setTimeout(() => {
+
+                    emailSection.style.display = "none";
+
+                    const chatInput =
+                        document.getElementById("chatInputSection");
+
+                    chatInput.style.display = "flex";
+                    chatInput.classList.add("fade-in");
+
+                }, 350);
+
+                document.getElementById("chatMessages").innerHTML = `
+        <div class="bot-msg">
+            👋 Welcome to AutoLinix AI.
+            <br><br>
+             How can I help you today?
+        </div>
+    `;
+
             }, 1500);
+
+
 
         }
         //- AI Widget
