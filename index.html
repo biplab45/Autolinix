@@ -1569,6 +1569,141 @@
             }
         }
 
+        /* About us detail */
+        .team-section{
+    padding:120px 8%;
+    position:relative;
+    overflow:hidden;
+}
+
+.team-section::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(139,92,246,.15);
+    filter:blur(150px);
+    top:-150px;
+    right:-150px;
+}
+
+.team-header{
+    text-align:center;
+    max-width:800px;
+    margin:auto;
+    margin-bottom:70px;
+}
+
+.section-tag{
+    display:inline-block;
+    padding:10px 18px;
+    border:1px solid rgba(139,92,246,.4);
+    border-radius:999px;
+    color:#a78bfa;
+    margin-bottom:20px;
+}
+
+.section-header h2{
+    font-size:clamp(2.5rem,5vw,4rem);
+    font-weight:800;
+    margin-bottom:20px;
+    color:white;
+}
+
+.section-header p{
+    color:#94a3b8;
+    line-height:1.8;
+    font-size:1.1rem;
+}
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.team-card{
+    background:rgba(15,23,42,.8);
+    border:1px solid rgba(255,255,255,.06);
+    backdrop-filter:blur(20px);
+    border-radius:28px;
+    padding:35px;
+    position:relative;
+    transition:.4s;
+}
+
+.team-card:hover{
+    transform:translateY(-10px);
+    border-color:rgba(139,92,246,.4);
+}
+
+.founder{
+    border:1px solid rgba(139,92,246,.4);
+}
+
+.glow{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(139,92,246,.2),
+        transparent
+    );
+    border-radius:28px;
+}
+
+.team-avatar{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #6366f1
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:700;
+    font-size:1.4rem;
+    margin-bottom:25px;
+}
+
+.team-card h3{
+    color:white;
+    font-size:1.5rem;
+    margin-bottom:8px;
+}
+
+.role{
+    color:#a78bfa;
+    font-weight:600;
+    display:block;
+    margin-bottom:20px;
+}
+
+.team-card p{
+    color:#94a3b8;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.socials{
+    display:flex;
+    gap:15px;
+}
+
+.socials a{
+    color:#c4b5fd;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.socials a:hover{
+    color:white;
+}
+
         /* ── CASE STUDIES ── */
         #case-studies {
             padding: 120px 0;
@@ -2668,6 +2803,37 @@
             style="color:var(--accent-mid);font-weight:700;">Book Strategy Call →</a>
     </div>
 
+    <section id="roi-calculator" class="section">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">ROI Calculator</div>
+                <h2>See How Much Time You Can <span class="gradient-text">Save</span></h2>
+            </div>
+
+            <div class="glass" style="padding:40px;max-width:700px;margin:auto;">
+
+                <div class="form-group">
+                    <label>Hours spent on manual tasks per week</label>
+                    <input type="number" id="hoursInput" value="20">
+                </div>
+
+                <div class="form-group">
+                    <label>Team Size</label>
+                    <input type="number" id="teamInput" value="5">
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateROI()">
+                    Calculate Savings
+                </button>
+
+                <div id="roiResult" style="margin-top:30px;font-size:22px;font-weight:700;">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
     <!-- HERO -->
     <section id="hero">
         <div class="hero-bg">
@@ -3150,6 +3316,79 @@
         </div>
     </section>
 
+    <section class="team-section" id="team">
+        <div class="container">
+
+            <div class="section-header">
+                <span class="section-tag">Leadership Team</span>
+                <h2>Meet The Minds Behind AutoLinix</h2>
+                <p>
+                    Building intelligent automation systems that help businesses
+                    save time, reduce costs, and scale faster.
+                </p>
+            </div>
+
+            <div class="team-grid">
+
+                <div class="team-card founder">
+                    <div class="glow"></div>
+
+                    <div class="team-avatar">BG</div>
+
+                    <h3>Biplab Goswami</h3>
+                    <span class="role">Founder & CEO</span>
+
+                    <p>
+                        Founded AutoLinix with a mission to help businesses
+                        eliminate repetitive work through AI Agents,
+                        Workflow Automation, CRM Systems, and intelligent
+                        business processes.
+                    </p>
+
+                    <div class="socials">
+                        <a href="#">LinkedIn</a>
+                        <a href="mailto:autolinix@gmail.com">Email</a>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">AS</div>
+
+                    <h3>Aritra Samanta</h3>
+                    <span class="role">Co-Founder</span>
+
+                    <p>
+                        Focuses on business strategy, client relationships,
+                        and operational growth while ensuring automation
+                        solutions deliver measurable results.
+                    </p>
+
+                    <div class="socials">
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">AK</div>
+
+                    <h3>Akash Snai</h3>
+                    <span class="role">Co-Founder</span>
+
+                    <p>
+                        Supports product innovation, solution implementation,
+                        and technology integration to help businesses adopt
+                        modern automation systems.
+                    </p>
+
+                    <div class="socials">
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS -->
     <section id="testimonials">
         <div class="container">
@@ -3527,9 +3766,9 @@
             <div class="footer-bottom">
                 <p>© 2025 AutoLinix. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html">Terms of Service</a>
+                    <a href="cookie-policy.html">Cookie Policy</a>
                 </div>
             </div>
         </div>
@@ -3718,6 +3957,22 @@
 
             const message =
                 input.value.trim();
+            if (!message) {
+
+                input.style.border = "1px solid #ef4444";
+                input.placeholder = "Please enter a message";
+                input.focus();
+
+                setTimeout(() => {
+                    input.style.border = "";
+                }, 3000);
+
+                return;
+            }
+            const sendBtn = document.querySelector("#chatInputSection button");
+
+            sendBtn.disabled = true;
+            sendBtn.innerText = "Sending...";
 
             if (!message) return;
 
@@ -3776,12 +4031,17 @@
                 botMsg.textContent = data.output;
 
                 chat.appendChild(botMsg);
+                sendBtn.disabled = false;
+                sendBtn.innerText = "Send";
 
             } catch (error) {
 
                 console.error(error);
 
                 typing.remove();
+
+                sendBtn.disabled = false;
+                sendBtn.innerText = "Send";
 
                 const botMsg = document.createElement("div");
                 botMsg.className = "bot-msg";
@@ -3913,7 +4173,7 @@
         <div class="bot-msg">
             👋 Welcome to AutoLinix AI.
             <br><br>
-             How can I help you today?
+             Before we begin, what's your name?
         </div>
     `;
 
