@@ -170,7 +170,8 @@
         }
 
         .bot-msg {
-            background: rgba(255, 255, 255, .05);
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, .08);
             max-width: 85%;
             line-height: 1.7;
             font-size: 15px;
@@ -1570,139 +1571,135 @@
         }
 
         /* About us detail */
-        .team-section{
-    padding:120px 8%;
-    position:relative;
-    overflow:hidden;
-}
+        .team-section {
+            padding: 120px 8%;
+            position: relative;
+            overflow: hidden;
+        }
 
-.team-section::before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:rgba(139,92,246,.15);
-    filter:blur(150px);
-    top:-150px;
-    right:-150px;
-}
+        .team-section::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(139, 92, 246, .15);
+            filter: blur(150px);
+            top: -150px;
+            right: -150px;
+        }
 
-.team-header{
-    text-align:center;
-    max-width:800px;
-    margin:auto;
-    margin-bottom:70px;
-}
+        .team-header {
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            margin-bottom: 70px;
+        }
 
-.section-tag{
-    display:inline-block;
-    padding:10px 18px;
-    border:1px solid rgba(139,92,246,.4);
-    border-radius:999px;
-    color:#a78bfa;
-    margin-bottom:20px;
-}
+        .section-tag {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid rgba(139, 92, 246, .4);
+            border-radius: 999px;
+            color: #a78bfa;
+            margin-bottom: 20px;
+        }
 
-.section-header h2{
-    font-size:clamp(2.5rem,5vw,4rem);
-    font-weight:800;
-    margin-bottom:20px;
-    color:white;
-}
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: white;
+        }
 
-.section-header p{
-    color:#94a3b8;
-    line-height:1.8;
-    font-size:1.1rem;
-}
+        .section-header p {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
 
-.team-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
-}
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-.team-card{
-    background:rgba(15,23,42,.8);
-    border:1px solid rgba(255,255,255,.06);
-    backdrop-filter:blur(20px);
-    border-radius:28px;
-    padding:35px;
-    position:relative;
-    transition:.4s;
-}
+        .team-card {
+            background: rgba(15, 23, 42, .8);
+            border: 1px solid rgba(255, 255, 255, .06);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 35px;
+            position: relative;
+            transition: .4s;
+        }
 
-.team-card:hover{
-    transform:translateY(-10px);
-    border-color:rgba(139,92,246,.4);
-}
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, .4);
+        }
 
-.founder{
-    border:1px solid rgba(139,92,246,.4);
-}
+        .founder {
+            border: 1px solid rgba(139, 92, 246, .4);
+        }
 
-.glow{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        135deg,
-        rgba(139,92,246,.2),
-        transparent
-    );
-    border-radius:28px;
-}
+        .glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                    rgba(139, 92, 246, .2),
+                    transparent);
+            border-radius: 28px;
+        }
 
-.team-avatar{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:linear-gradient(
-        135deg,
-        #8b5cf6,
-        #6366f1
-    );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-weight:700;
-    font-size:1.4rem;
-    margin-bottom:25px;
-}
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,
+                    #8b5cf6,
+                    #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+        }
 
-.team-card h3{
-    color:white;
-    font-size:1.5rem;
-    margin-bottom:8px;
-}
+        .team-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
 
-.role{
-    color:#a78bfa;
-    font-weight:600;
-    display:block;
-    margin-bottom:20px;
-}
+        .role {
+            color: #a78bfa;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 20px;
+        }
 
-.team-card p{
-    color:#94a3b8;
-    line-height:1.8;
-    margin-bottom:25px;
-}
+        .team-card p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
 
-.socials{
-    display:flex;
-    gap:15px;
-}
+        .socials {
+            display: flex;
+            gap: 15px;
+        }
 
-.socials a{
-    color:#c4b5fd;
-    text-decoration:none;
-    transition:.3s;
-}
+        .socials a {
+            color: #c4b5fd;
+            text-decoration: none;
+            transition: .3s;
+        }
 
-.socials a:hover{
-    color:white;
-}
+        .socials a:hover {
+            color: white;
+        }
 
         /* ── CASE STUDIES ── */
         #case-studies {
@@ -2524,6 +2521,81 @@
         .animate-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .chat-btn {
+            display: inline-block;
+            padding: 12px 18px;
+            background: white;
+            color: #111827;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .chat-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-title {
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .chat-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .chat-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .call-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .email-btn {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .website-btn {
+            background: #111827;
+            border: 1px solid #6366f1;
+            color: white;
+        }
+
+        .book-btn {
+            background: linear-gradient(135deg,
+                    #6366f1,
+                    #a855f7);
+            color: white;
+        }
+
+        .chat-btn:hover {
+            transform: translateY(-2px);
+            transition: .2s;
         }
 
         /* ── MOBILE ── */
@@ -3943,6 +4015,13 @@
             sendBtn.disabled = true;
             sendBtn.innerText = "Sending...";
 
+            input.disabled = true;
+            
+
+            const currentMessage = message;
+            input.value = "";
+            input.focus();
+
             if (!message) return;
 
             const chat =
@@ -3999,15 +4078,119 @@
                 const data = await response.json();
 
                 typing.remove();
-
                 const botMsg = document.createElement("div");
                 botMsg.className = "bot-msg";
 
-                botMsg.textContent = data.output;
+                if (data.output.includes("CONTACT_US")) {
+
+                    botMsg.innerHTML = `
+        <div class="contact-card">
+
+            <p class="contact-title">
+                Choose the best way to connect with our team:
+            </p>
+
+            <a href="tel:+918535879358"
+               class="chat-btn call-btn">
+               📞 Call AutoLinix
+            </a>
+
+            <a href="https://wa.me/918535879358"
+               target="_blank"
+               class="chat-btn whatsapp-btn">
+               <i class="fab fa-whatsapp"></i>
+               WhatsApp AutoLinix
+            </a>
+
+            <a href="mailto:autolinix@gmail.com"
+               class="chat-btn email-btn">
+               ✉️ Email AutoLinix
+            </a>
+
+            <a href="https://www.autolinix.com"
+               target="_blank"
+               class="chat-btn website-btn">
+               🌐 Visit Website
+            </a>
+
+        </div>
+    `;
+                }
+
+                else if (data.output.includes("CALL_US")) {
+
+                    botMsg.innerHTML = `
+        <p>You can reach our team directly by phone.</p>
+
+        <a href="tel:+918535879358"
+           class="chat-btn call-btn">
+           📞 Call AutoLinix
+        </a>
+    `;
+                }
+
+                else if (data.output.includes("WHATSAPP_US")) {
+
+                    botMsg.innerHTML = `
+        <p>Need a quick response? Chat with us on WhatsApp.</p>
+
+        <a href="https://wa.me/918535879358"
+           target="_blank"
+           class="chat-btn whatsapp-btn">
+           <i class="fab fa-whatsapp"></i>
+           WhatsApp AutoLinix
+        </a>
+    `;
+                }
+
+                else if (data.output.includes("EMAIL_US")) {
+
+                    botMsg.innerHTML = `
+        <p>For proposals, partnerships, or support:</p>
+
+        <a href="mailto:autolinix@gmail.com"
+           class="chat-btn email-btn">
+           ✉️ Email AutoLinix
+        </a>
+    `;
+                }
+
+                else if (data.output.includes("VISIT_WEBSITE")) {
+
+                    botMsg.innerHTML = `
+        <p>Learn more about our services and case studies.</p>
+
+        <a href="https://www.autolinix.com"
+           target="_blank"
+           class="chat-btn website-btn">
+           🌐 Visit AutoLinix
+        </a>
+    `;
+                }
+
+                else if (data.output.includes("BOOK_CALL")) {
+
+                    botMsg.innerHTML = `
+        <p>Let's discuss your automation goals.</p>
+
+        <a href="https://calendly.com/autolinix/30min"
+           target="_blank"
+           class="chat-btn book-btn">
+           📅 Book Free Strategy Call
+        </a>
+    `;
+                }
+
+                else {
+                    botMsg.innerHTML = data.output;
+                }
 
                 chat.appendChild(botMsg);
                 sendBtn.disabled = false;
                 sendBtn.innerText = "Send";
+
+                input.disabled = false;
+                input.focus();
 
             } catch (error) {
 
@@ -4018,15 +4201,18 @@
                 sendBtn.disabled = false;
                 sendBtn.innerText = "Send";
 
+                input.disabled = false;
+                input.focus();
+
                 const botMsg = document.createElement("div");
                 botMsg.className = "bot-msg";
 
                 botMsg.textContent = "Error getting response.";
 
                 chat.appendChild(botMsg);
+                input.value = "";
+                input.focus();
             }
-
-            input.value = "";
             chat.scrollTop = chat.scrollHeight;
         }
 
@@ -4038,7 +4224,7 @@
                 .value
                 .trim();
 
-                if (!localStorage.getItem("sessionId")) {
+            if (!localStorage.getItem("sessionId")) {
                 const sessionId = crypto.randomUUID();
                 localStorage.setItem("sessionId", sessionId);
             }
@@ -4068,7 +4254,9 @@
             }
 
             // Clear error
-            emailError.textContent = "";
+           emailError.textContent = "";
+
+            document.getElementById("userEmail").value = "";
             const continueBtn = document.querySelector("#emailSection button");
 
             continueBtn.disabled = true;
@@ -4142,11 +4330,15 @@
 
                     emailSection.style.display = "none";
 
-                    const chatInput =
+                    const chatInputSection =
                         document.getElementById("chatInputSection");
 
-                    chatInput.style.display = "flex";
-                    chatInput.classList.add("fade-in");
+                    chatInputSection.style.display = "flex";
+                    chatInputSection.classList.add("fade-in");
+
+                    setTimeout(() => {
+                        document.getElementById("chatInput").focus();
+                    }, 100);
 
                 }, 350);
 
@@ -4183,6 +4375,24 @@
                 if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
             });
         });
+
+       window.onload = function () {
+
+            document.getElementById("userEmail").addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    startChat();
+                }
+            });
+
+            document.getElementById("chatInput").addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+        };
     </script>
 </body>
 
